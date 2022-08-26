@@ -12,5 +12,12 @@ before_install:
 script:
   - docker run -e CI=TRUE test npm run test -- --coverage
 
-after_success:
-  - echo "Test success"
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-1"
+  app: "travisTestEB"
+  env: "travistesteb-env"
+  bucket_name: "elasticbeanstalk-us-west-1-138588601522"
+  bucket_path: "travisTestEB"
+  on:
+    branch: master
